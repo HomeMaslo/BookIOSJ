@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author pavel
  */
-public class People  implements Serializable{
+public class People implements Serializable {
 
     private String name;
     private String tell;
@@ -29,21 +29,18 @@ public class People  implements Serializable{
     public String getTell() {
         return tell;
     }
+
     public void setTell(String tell) {
         this.tell = tell;
     }
-    
+
     public String getSkype() {
         return skype;
     }
-    
+
     public void setSkype(String skype) {
         this.skype = skype;
     }
-
- 
-
-    
 
     public String getName() {
         return name;
