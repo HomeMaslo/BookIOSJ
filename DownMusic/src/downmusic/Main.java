@@ -5,7 +5,9 @@
  */
 package downmusic;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +22,14 @@ import java.util.logging.Logger;
 public class Main {
 
     public static void main(String[] arg) {
+        File storeDir = new File("Downloads");
+        
+        if (!storeDir.exists()) {
+            storeDir.mkdir();
+        }
+        
         List<String> urls = new ArrayList<>();
-        List<DownMusic> ob = new ArrayList<>();
+        
         try {
             URL url = new URL("http://www.ex.ua/playlist/7026463.m3u");
             Scanner scanner = new Scanner(url.openStream());
@@ -35,11 +43,11 @@ public class Main {
 
         System.out.println(urls);
         for (String url : urls) {
-            ob.add(new DownMusic(url));
-        }
-        for (DownMusic music : ob) {
-
-            new Thread(music).start();
+            try {
+                new Thread(new DownMusic(storeDir, url)).start();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         /*   
